@@ -9,14 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    let topText = "TOP"
+    let bottomText = "BOTTOM"
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var bottomToolbar: UIToolbar!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     struct Meme {
         var top: String
@@ -28,12 +30,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let memeTextAttributes:[NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth: 1]
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
+        //NSAttributedString.Key.strokeWidth: 1]
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
         subscribeToKeyboardNotifications()
     }
     
@@ -44,11 +51,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //topTextField.defaultTextAttributes = memeTextAttributes
-        //bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        shareButton.isEnabled = false
+        
+        resetViews()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -57,6 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
+            shareButton.isEnabled = true
         }
     }
     
@@ -80,29 +89,46 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func saveMeme(_ sender: Any) {
+        print("Save meme called")
         let memedImage = generateMemedImage()
-        let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+        _ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
         
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        
+        controller.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                // User canceled
+                return
+            }
+            self.resetViews()
+        }
+        
         self.present(controller, animated: true, completion: nil)
     }
+
     
     func generateMemedImage() -> UIImage {
-        bottomToolbar.isHidden = true
-        saveButton.isHidden = true
-        clearButton.isHidden = true
+        toggleToolbarsVisibility(true)
         
-        // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        bottomToolbar.isHidden = false
-        saveButton.isHidden = false
-        clearButton.isHidden = false
-        
+        toggleToolbarsVisibility(false)
         return memedImage
+    }
+    
+    func toggleToolbarsVisibility(_ isHidden: Bool) {
+        bottomToolbar.isHidden = isHidden
+        shareButton.isHidden = isHidden
+    }
+    
+    func resetViews() {
+        self.imageView.image = nil
+        self.topTextField.text = topText
+        self.bottomTextField.text = bottomText
+        shareButton.isEnabled = false
     }
     
     
@@ -112,6 +138,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == "" {
+            if textField.tag == 0 {
+                textField.text = topText
+            } else if textField.tag == 1 {
+                textField.text = bottomText
+            }
+        }
     }
     
     func subscribeToKeyboardNotifications() {
