@@ -41,14 +41,14 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emO-1H-ws0">
-                                <rect key="frame" x="145.5" y="70" width="84" height="47"/>
+                                <rect key="frame" x="145.5" y="94" width="84" height="47"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-5L-EJO">
-                                <rect key="frame" x="101" y="570" width="173" height="47"/>
+                                <rect key="frame" x="101" y="550" width="173" height="47"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
@@ -76,13 +76,13 @@
                             <constraint firstItem="Mv8-zx-Nel" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Cjj-6K-QC9"/>
                             <constraint firstItem="emO-1H-ws0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="RBA-r3-e0w"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="TBn-4n-ZFv"/>
-                            <constraint firstItem="cFa-5L-EJO" firstAttribute="bottom" secondItem="TCM-JR-Y9a" secondAttribute="bottom" id="TbI-fV-fTr"/>
+                            <constraint firstItem="cFa-5L-EJO" firstAttribute="bottom" secondItem="Mv8-zx-Nel" secondAttribute="top" constant="-30" id="TbI-fV-fTr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cFa-5L-EJO" secondAttribute="trailing" constant="20" id="UuV-K2-GKf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="emO-1H-ws0" secondAttribute="trailing" constant="20" id="V8c-df-lMw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mv8-zx-Nel" secondAttribute="trailing" id="Z9B-p7-iYr"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eI1-8g-00C"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hne-5i-f2f" secondAttribute="trailing" id="goU-DR-K5t"/>
-                            <constraint firstItem="emO-1H-ws0" firstAttribute="top" secondItem="TCM-JR-Y9a" secondAttribute="top" id="kOF-YQ-lba"/>
+                            <constraint firstItem="emO-1H-ws0" firstAttribute="top" secondItem="Hne-5i-f2f" secondAttribute="bottom" constant="30" id="kOF-YQ-lba"/>
                             <constraint firstItem="cFa-5L-EJO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ndY-2T-TXk"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nhx-nv-Vg7"/>
                             <constraint firstItem="cFa-5L-EJO" firstAttribute="centerX" secondItem="TCM-JR-Y9a" secondAttribute="centerX" id="oh7-8N-Z56"/>
