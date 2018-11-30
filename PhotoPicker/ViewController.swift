@@ -28,16 +28,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var memedImage: UIImage
     }
     
-    let memeTextAttributes:[NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.foregroundColor: UIColor.white,
+//    let memeTextAttributes:[NSAttributedString.Key: Any] = [
+//        NSAttributedString.Key.foregroundColor: UIColor.white,
+//        ]
+    
+    let strokeTextAttributes = [
+        NSAttributedString.Key.strokeColor : UIColor.black,
+        NSAttributedString.Key.foregroundColor : UIColor.white,
+        NSAttributedString.Key.strokeWidth : -4.0,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
+        as [NSAttributedString.Key : Any]
+    
+//    let memeTextAttributes:[NSAttributedString.Key: Any] = [NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.strokeWidth: -1.0, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40.0)]
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
+        topTextField.defaultTextAttributes = strokeTextAttributes
+        bottomTextField.defaultTextAttributes = strokeTextAttributes
+    
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         subscribeToKeyboardNotifications()
