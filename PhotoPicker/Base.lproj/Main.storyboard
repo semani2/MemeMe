@@ -54,36 +54,39 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGA-hA-EkQ">
-                                <rect key="frame" x="20" y="30" width="40" height="30"/>
-                                <state key="normal" title="Share">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveMeme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g8a-Zc-e71"/>
-                                </connections>
-                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hne-5i-f2f">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Meme Me" id="wNG-IE-ufl">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="uCW-ZI-WIN">
+                                            <connections>
+                                                <action selector="saveMeme:" destination="BYZ-38-t0r" id="9RJ-Xz-Ied"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TCM-JR-Y9a" secondAttribute="trailing" constant="20" id="5xM-bV-KTk"/>
+                            <constraint firstItem="Hne-5i-f2f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9A6-IA-DGb"/>
                             <constraint firstItem="emO-1H-ws0" firstAttribute="centerX" secondItem="TCM-JR-Y9a" secondAttribute="centerX" id="9zr-hq-qfN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="Hne-5i-f2f" secondAttribute="top" constant="20" id="ApS-By-ydw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TCM-JR-Y9a" secondAttribute="bottom" constant="50" id="CFA-4R-2Fj"/>
                             <constraint firstItem="Mv8-zx-Nel" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Cjj-6K-QC9"/>
-                            <constraint firstItem="hGA-hA-EkQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Ppm-aC-93o"/>
                             <constraint firstItem="emO-1H-ws0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="RBA-r3-e0w"/>
-                            <constraint firstItem="hGA-hA-EkQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="S4E-5Y-6QA"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="TBn-4n-ZFv"/>
                             <constraint firstItem="cFa-5L-EJO" firstAttribute="bottom" secondItem="TCM-JR-Y9a" secondAttribute="bottom" id="TbI-fV-fTr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cFa-5L-EJO" secondAttribute="trailing" constant="20" id="UuV-K2-GKf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="emO-1H-ws0" secondAttribute="trailing" constant="20" id="V8c-df-lMw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mv8-zx-Nel" secondAttribute="trailing" id="Z9B-p7-iYr"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eI1-8g-00C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hne-5i-f2f" secondAttribute="trailing" id="goU-DR-K5t"/>
                             <constraint firstItem="emO-1H-ws0" firstAttribute="top" secondItem="TCM-JR-Y9a" secondAttribute="top" id="kOF-YQ-lba"/>
                             <constraint firstItem="cFa-5L-EJO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ndY-2T-TXk"/>
                             <constraint firstItem="TCM-JR-Y9a" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nhx-nv-Vg7"/>
                             <constraint firstItem="cFa-5L-EJO" firstAttribute="centerX" secondItem="TCM-JR-Y9a" secondAttribute="centerX" id="oh7-8N-Z56"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hGA-hA-EkQ" secondAttribute="trailing" symbolic="YES" id="yNG-MJ-xzN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Mv8-zx-Nel" secondAttribute="bottom" id="ys1-Dy-mAw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -93,7 +96,8 @@
                         <outlet property="bottomToolbar" destination="Mv8-zx-Nel" id="l1m-aG-7wM"/>
                         <outlet property="cameraButton" destination="nNY-RC-fz8" id="ong-nF-Ngm"/>
                         <outlet property="imageView" destination="TCM-JR-Y9a" id="qnN-lz-nb1"/>
-                        <outlet property="shareButton" destination="hGA-hA-EkQ" id="E81-5t-xVc"/>
+                        <outlet property="navigationBar" destination="Hne-5i-f2f" id="kCI-fX-Hge"/>
+                        <outlet property="shareButton" destination="uCW-ZI-WIN" id="gEF-29-Wb2"/>
                         <outlet property="topTextField" destination="emO-1H-ws0" id="8cq-rK-A5x"/>
                     </connections>
                 </viewController>

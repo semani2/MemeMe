@@ -18,7 +18,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var bottomToolbar: UIToolbar!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     struct Meme {
         var top: String
@@ -28,10 +29,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     let memeTextAttributes:[NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
-        //NSAttributedString.Key.strokeWidth: 1]
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -91,7 +90,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func saveMeme(_ sender: Any) {
         print("Save meme called")
         let memedImage = generateMemedImage()
-        _ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
         
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
@@ -100,6 +98,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 // User canceled
                 return
             }
+            let meme = Meme(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: memedImage)
             self.resetViews()
         }
         
@@ -121,7 +120,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func toggleToolbarsVisibility(_ isHidden: Bool) {
         bottomToolbar.isHidden = isHidden
-        shareButton.isHidden = isHidden
+        navigationBar.isHidden = isHidden
     }
     
     func resetViews() {
