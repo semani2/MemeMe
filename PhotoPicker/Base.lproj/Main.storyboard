@@ -67,6 +67,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TCM-JR-Y9a" secondAttribute="trailing" constant="20" id="5xM-bV-KTk"/>
                             <constraint firstItem="Hne-5i-f2f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9A6-IA-DGb"/>
