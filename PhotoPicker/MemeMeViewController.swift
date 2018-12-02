@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     let topText = "TOP"
     let bottomText = "BOTTOM"
@@ -38,15 +38,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedString.Key.strokeWidth : -4.0,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
         as [NSAttributedString.Key : Any]
-    
-//    let memeTextAttributes:[NSAttributedString.Key: Any] = [NSAttributedString.Key.strokeColor: UIColor.black, NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.strokeWidth: -1.0, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40.0)]
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        topTextField.defaultTextAttributes = strokeTextAttributes
-        bottomTextField.defaultTextAttributes = strokeTextAttributes
-    
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         subscribeToKeyboardNotifications()
@@ -59,8 +54,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        initTextField(topTextField)
+        initTextField(bottomTextField)
         
         shareButton.isEnabled = false
         
@@ -83,16 +78,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func pickImage(_ sender: Any) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = .photoLibrary
-        present(controller, animated: true, completion: nil)
+        performImagePicking(.photoLibrary)
     }
     
     @IBAction func pickCameraImage(_ sender: Any) {
+        performImagePicking(.camera)
+    }
+    
+    func performImagePicking(_ source: UIImagePickerController.SourceType) {
         let controller = UIImagePickerController()
         controller.delegate = self
-        controller.sourceType = .camera
+        controller.sourceType = source
         present(controller, animated: true, completion: nil)
     }
     
@@ -145,6 +141,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
@@ -169,7 +166,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if (bottomTextField.isEditing) {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
@@ -180,6 +179,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
+    }
+    
+    func initTextField(_ textField: UITextField) {
+        textField.defaultTextAttributes = strokeTextAttributes
+        textField.delegate = self
     }
 }
 
