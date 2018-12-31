@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     let topText = "TOP"
     let bottomText = "BOTTOM"
@@ -21,23 +21,14 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    struct Meme {
-        var top: String
-        var bottom: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
-//    let memeTextAttributes:[NSAttributedString.Key: Any] = [
-//        NSAttributedString.Key.foregroundColor: UIColor.white,
-//        ]
-    
     let strokeTextAttributes = [
         NSAttributedString.Key.strokeColor : UIColor.black,
         NSAttributedString.Key.foregroundColor : UIColor.white,
         NSAttributedString.Key.strokeWidth : -4.0,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
         as [NSAttributedString.Key : Any]
+    
+    var meme: Meme!
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,6 +51,14 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         shareButton.isEnabled = false
         
         resetViews()
+        
+        if (meme != nil) {
+            topTextField.text = meme.top
+            bottomTextField.text = meme.bottom
+            imageView.image = meme.originalImage
+            
+            shareButton.isEnabled = true
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -104,12 +103,21 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
                 return
             }
             let meme = Meme(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: memedImage)
+            (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            
+            print("Meme appended, size of memes \((UIApplication.shared.delegate as! AppDelegate).memes.count)")
+            
             self.resetViews()
+            self.dismissView()
         }
         
         self.present(controller, animated: true, completion: nil)
     }
 
+    @IBAction func dismissView() {
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func generateMemedImage() -> UIImage {
         toggleToolbarsVisibility(true)
