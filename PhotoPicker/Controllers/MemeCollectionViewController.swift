@@ -44,31 +44,17 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-        let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
-        goToMemeDetails(meme: meme)
+        let memeIndex = (indexPath as NSIndexPath).row
+        let meme = appDelegate.memes[memeIndex]
+        goToMemeDetails(meme: meme, memeIndex: memeIndex)
     }
-//    
-//    @IBAction func addNewMeme() {
-//        goToMemeEditor(meme: nil)
-//    }
     
-//    func goToMemeEditor(meme: Meme!) {
-//        print("Trying to go to edit controller")
-//        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
-//            as! MemeEditorViewController
-//        if let meme = meme {
-//            editController.meme = meme
-//        }
-//        self.navigationController!.pushViewController(editController, animated: true)
-//    }
-    
-    func goToMemeDetails(meme: Meme!) {
+    func goToMemeDetails(meme: Meme, memeIndex: Int) {
         print("Trying to go to detail controller")
         let detailContoller = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as! MemeDetailViewController
-        if let meme = meme {
-            detailContoller.meme = meme
-        }
+        detailContoller.memeIndex = memeIndex;
+        detailContoller.meme = meme;
         self.navigationController!.pushViewController(detailContoller, animated: true)
     }
 }

@@ -24,10 +24,6 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         print("Table view appear, size of memes: \(appDelegate.memes.count)")
         memeTableView.reloadData()
     }
-//    
-//    @IBAction func addNewMeme() {
-//        goToMemeEditor(meme: nil)
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.memes.count
@@ -48,27 +44,17 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
-        goToMemeDetails(meme: meme)
+        let memeIndex = (indexPath as NSIndexPath).row
+        let meme = appDelegate.memes[memeIndex]
+        goToMemeDetails(meme: meme, memeIndex: memeIndex)
     }
     
-//    func goToMemeEditor(meme: Meme!) {
-//        print("Trying to go to edit controller")
-//        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
-//            as! MemeEditorViewController
-//        if let meme = meme {
-//            editController.meme = meme
-//        }
-//        self.navigationController!.pushViewController(editController, animated: true)
-//    }
-    
-    func goToMemeDetails(meme: Meme!) {
+    func goToMemeDetails(meme: Meme, memeIndex: Int) {
         print("Trying to go to detail controller")
         let detailContoller = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as! MemeDetailViewController
-        if let meme = meme {
-            detailContoller.meme = meme
-        }
+        detailContoller.meme = meme
+        detailContoller.memeIndex = memeIndex
         self.navigationController!.pushViewController(detailContoller, animated: true)
     }
 }

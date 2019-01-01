@@ -29,6 +29,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         as [NSAttributedString.Key : Any]
     
     var meme: Meme!
+    var memeIndex: Int!
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,7 +57,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             topTextField.text = meme.top
             bottomTextField.text = meme.bottom
             imageView.image = meme.originalImage
-            
             shareButton.isEnabled = true
         }
     }
@@ -102,9 +102,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 // User canceled
                 return
             }
-            let meme = Meme(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: memedImage)
-            (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
-            
+            if (self.memeIndex == nil && self.meme == nil) {
+                let meme = Meme(top: self.topTextField.text!, bottom: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: memedImage)
+                (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+            } else {
+                    self.meme.top = self.topTextField.text!
+                    self.meme.bottom = self.bottomTextField.text!
+                    self.meme.originalImage = self.imageView.image!
+                    self.meme.memedImage = memedImage
+                
+                    (UIApplication.shared.delegate as! AppDelegate).memes[self.memeIndex] = self.meme
+            }
+        
             print("Meme appended, size of memes \((UIApplication.shared.delegate as! AppDelegate).memes.count)")
             
             self.resetViews()
