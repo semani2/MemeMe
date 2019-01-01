@@ -47,20 +47,20 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
         goToMemeDetails(meme: meme)
     }
+//    
+//    @IBAction func addNewMeme() {
+//        goToMemeEditor(meme: nil)
+//    }
     
-    @IBAction func addNewMeme() {
-        goToMemeEditor(meme: nil)
-    }
-    
-    func goToMemeEditor(meme: Meme!) {
-        print("Trying to go to edit controller")
-        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
-            as! MemeEditorViewController
-        if let meme = meme {
-            editController.meme = meme
-        }
-        self.navigationController!.pushViewController(editController, animated: true)
-    }
+//    func goToMemeEditor(meme: Meme!) {
+//        print("Trying to go to edit controller")
+//        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
+//            as! MemeEditorViewController
+//        if let meme = meme {
+//            editController.meme = meme
+//        }
+//        self.navigationController!.pushViewController(editController, animated: true)
+//    }
     
     func goToMemeDetails(meme: Meme!) {
         print("Trying to go to detail controller")

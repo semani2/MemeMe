@@ -52,7 +52,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AVu-mC-tet">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AVu-mC-tet">
                             <size key="itemSize" width="208" height="198"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -60,7 +60,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="ugL-pa-38y" customClass="MemeCollectionViewCell" customModule="PhotoPicker" customModuleProvider="target">
-                                <rect key="frame" x="83.5" y="0.0" width="208" height="198"/>
+                                <rect key="frame" x="0.0" y="0.0" width="208" height="198"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="208" height="198"/>
@@ -94,6 +94,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="j5z-NY-MeZ">
                             <connections>
                                 <action selector="addNewMeme" destination="ubF-vz-XxX" id="BJc-1B-JVd"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="Tog-Pe-kkW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -134,22 +135,35 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="dHP-lE-R5O" style="IBUITableViewCellStyleDefault" id="wMt-b9-opP">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" rowHeight="83" id="wMt-b9-opP" customClass="MemeTableViewCell" customModule="PhotoPicker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wMt-b9-opP" id="eEV-Lq-Qlo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dHP-lE-R5O">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYv-7z-mZK">
+                                                    <rect key="frame" x="160" y="31" width="200" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wC-fv-pBy">
+                                                    <rect key="frame" x="0.0" y="-17" width="159" height="117"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JYv-7z-mZK" firstAttribute="centerY" secondItem="eEV-Lq-Qlo" secondAttribute="centerY" id="4SJ-JV-UPj"/>
+                                                <constraint firstAttribute="trailing" secondItem="JYv-7z-mZK" secondAttribute="trailing" constant="127.5" id="bUq-M4-8f3"/>
+                                                <constraint firstItem="JYv-7z-mZK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eEV-Lq-Qlo" secondAttribute="leading" constant="20" symbolic="YES" id="rAg-dM-PlM"/>
+                                                <constraint firstItem="JYv-7z-mZK" firstAttribute="top" secondItem="eEV-Lq-Qlo" secondAttribute="topMargin" constant="20" id="xhh-vu-dTg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="memeImageView" destination="3wC-fv-pBy" id="dVo-hb-plN"/>
+                                            <outlet property="memeTitleLabel" destination="JYv-7z-mZK" id="caL-Cv-a9o"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -172,6 +186,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qZQ-5y-N0b">
                             <connections>
                                 <action selector="addNewMeme" destination="pcS-gS-3qk" id="Mtr-gf-VjN"/>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="TOU-uf-1F1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -201,12 +216,12 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="MOP-GZ-YUP"/>
-                                    <barButtonItem title="Camera" id="nNY-RC-fz8">
+                                    <barButtonItem systemItem="camera" id="nNY-RC-fz8">
                                         <connections>
                                             <action selector="pickCameraImage:" destination="BYZ-38-t0r" id="npI-dq-FoU"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Pick Image" id="CcC-tQ-PLz">
+                                    <barButtonItem title="Gallery" id="CcC-tQ-PLz">
                                         <connections>
                                             <action selector="pickImage:" destination="BYZ-38-t0r" id="IJx-eA-LcT"/>
                                         </connections>
@@ -246,7 +261,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TCM-JR-Y9a" secondAttribute="trailing" constant="20" id="5xM-bV-KTk"/>
                             <constraint firstItem="Hne-5i-f2f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9A6-IA-DGb"/>
@@ -282,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1684" y="271"/>
+            <point key="canvasLocation" x="1698" y="157"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="NvG-pE-NWX">
@@ -315,11 +330,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lp5-8C-sFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2588" y="-539"/>
+            <point key="canvasLocation" x="1638" y="-541"/>
         </scene>
     </scenes>
     <resources>
         <image name="Collection" width="30" height="30"/>
         <image name="List" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TOU-uf-1F1"/>
+    </inferredMetricsTieBreakers>
 </document>

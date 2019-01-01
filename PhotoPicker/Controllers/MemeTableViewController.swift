@@ -24,10 +24,10 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         print("Table view appear, size of memes: \(appDelegate.memes.count)")
         memeTableView.reloadData()
     }
-    
-    @IBAction func addNewMeme() {
-        goToMemeEditor(meme: nil)
-    }
+//    
+//    @IBAction func addNewMeme() {
+//        goToMemeEditor(meme: nil)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.memes.count
@@ -35,14 +35,14 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("Reading table details")
-        let CellID = "MemeTableCell"
+        let CellID = "MemeTableViewCell"
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! MemeTableViewCell
         
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
         
-        cell.textLabel!.text = meme.top + " .... " + meme.bottom
-        cell.imageView!.image = meme.memedImage
+        cell.memeTitleLabel!.text = meme.top + " .. " + meme.bottom
+        cell.memeImageView!.image = meme.memedImage
         
         return cell
     }
@@ -52,15 +52,15 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         goToMemeDetails(meme: meme)
     }
     
-    func goToMemeEditor(meme: Meme!) {
-        print("Trying to go to edit controller")
-        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
-            as! MemeEditorViewController
-        if let meme = meme {
-            editController.meme = meme
-        }
-        self.navigationController!.pushViewController(editController, animated: true)
-    }
+//    func goToMemeEditor(meme: Meme!) {
+//        print("Trying to go to edit controller")
+//        let editController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController")
+//            as! MemeEditorViewController
+//        if let meme = meme {
+//            editController.meme = meme
+//        }
+//        self.navigationController!.pushViewController(editController, animated: true)
+//    }
     
     func goToMemeDetails(meme: Meme!) {
         print("Trying to go to detail controller")
