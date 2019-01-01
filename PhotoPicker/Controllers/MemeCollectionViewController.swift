@@ -14,6 +14,7 @@ class MemeCollectionViewController: UICollectionViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var memeCollectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,12 @@ class MemeCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         print("Collection view appear, size of memes: \(appDelegate.memes.count)")
         memeCollectionView.reloadData()
+        
+        let space:CGFloat = 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: 150, height: 150)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -37,7 +44,7 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
         
         // Set the name and image
-        cell.memeLabel.text = meme.top
+        cell.memeLabel.text = "\(meme.top) .. \(meme.bottom)"
         cell.memeImageView!.image = meme.memedImage
         
         return cell
